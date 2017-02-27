@@ -1,0 +1,94 @@
+<ion-view>
+	<ion-nav-title class="light">
+		Search Results: {{lstRoom.length}} of {{AllRoom.length}}
+	</ion-nav-title>
+
+  <ion-nav-buttons side="left">
+    <button class="button button-clear" ng-click="goBackToSearch()">
+      <i class="icon ion-ios-arrow-back"></i>
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear button-light" ng-click="filterSearch()">
+      {{filterOn ? "Filtered" : "All"}}
+    </button>
+  </ion-nav-buttons>
+	<ion-content has-bouncing="false" delegate-handle="mainScroll">
+		<div class="list">
+        <div class="card" ng-repeat="room in  lstRoom">
+          <ion-slide-box style="height: 180pt;" on-slide-changed="slideHasChanged($index)">
+            <ion-slide>
+              <div class="card roomDetail-card" >
+                <!--overlay room info-->
+                <div class="item item-text-wrap">
+                  <h1 class="disp-rname">{{room.name}}</h1>
+                  {{room.location}}
+                  <p>{{slot}}<br>Seats: {{room.seating}}
+                  </p>
+                </div>
+              </div>
+              <img ng-src="{{getImage(room.siteID , room.img)}}" class="slide-img"/>
+
+            </ion-slide>
+            <ion-slide>
+              <!--LARA 11Feb16: added fullscreen toggle-->
+              <button ng-hide="room.xLocation === -1 && room.yLocation === -1" ng-style="{'position':'absolute', 'left': room.xLocation + 'px', 'top': room.yLocation + 'px'}" class="button-balanced button-icon icon ion-android-pin balanced" ng-click="fullScreen(getImage(room.siteID, room.floor))"></button>
+              <img ng-src="{{getImage(room.siteID , room.floor)}}" class="slide-img", ng-click="fullScreen(getImage(room.siteID, room.floor))"/>
+            </ion-slide>
+          </ion-slide-box>
+          <ion-scroll class="available-slots available-slots-height" ng-if="room.slotShow">
+            <div class="item item-divider item-icon-left" style="padding-left:24px;" ng-click="room.slotShow= !room.slotShow">
+              <i class="positive" ng-class="slotShowIconCss(room.slotShow)" ></i>
+              &nbsp;{{room.name}}
+            </div>
+            <ion-item ng-repeat="s in room.slots" class="item item-checkbox">
+              <div ng-if="s.status === 'vacant'">
+                <label class="checkbox">
+                  <input type="checkbox" ng-model="s.checked" ng-click="selectTimeSlot(s, room.slots)"/>
+                </label>
+              </div>
+              <span ng-class="roomCss(s.status)" style="width:5px;">&nbsp;</span>
+              {{s.start}} - {{s.end}} &nbsp;  {{s.info}}
+            </ion-item>
+          </ion-scroll>
+          <div class="button-bar">
+            <button class="item button icon-left button-positive" style="margin-top:0px;margin-bottom:-1px;" ng-class="slotShowIconCss(room.slotShow)" ng-click="room.slotShow= !room.slotShow; getSlots(room.id, room.slotShow)">All Slots</button><!-- viewOtherSlots(room) -->
+            <button class="item button button-balanced" style="margin-top:0px;" ng-click="reserve(room.id, room.name, room.slots,!room.slotShow)">Reserve</button>
+          </div>
+
+        </div>
+
+
+		</div>
+
+		<ion-infinite-scroll
+	      ng-if="lstRoom.length != AllRoom.length"
+	      icon="ion-loading-c"
+	      distance="1%"
+	      on-infinite="loadMore()">
+	    </ion-infinite-scroll>
+	</ion-content>
+</ion-view>
+
+<script id="view-slots.html" type="text/ng-template">
+
+	  	<ion-list>
+
+			<label class="item item-input">
+				<input type="text" placeholder="Reservation Description" ng-model="selRoom.des">
+			</label>
+	  		<ion-item class="item-divider">
+	  			Please Select:
+	  		</ion-item>
+			<ion-item ng-repeat="s in selRoom.slots" class="item item-checkbox">
+					<div ng-hide="s.status">
+					<label class="checkbox">
+						<input type="checkbox">
+					</label>
+				</div>
+				<span ng-class="roomCss(s.status)" style="width:5px;">&nbsp;</span>
+				{{s.start}} - {{s.end}} &nbsp;  {{s.info}}
+			</ion-item>
+		</ion-list>
+
+</script>

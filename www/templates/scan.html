@@ -1,0 +1,23 @@
+<style>
+.scroll-content{
+  display: table !important;
+  width: 100% !important;
+  height: 85% !important;
+}
+.scroll {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+</style>
+<ion-view>
+	<ion-nav-title class="light">
+		Scan
+	</ion-nav-title>
+	<ion-content has-bouncing="false">
+		 <button class="button button-light button-large" ng-click="scan()">
+			<i class="icon ion-qr-scanner"></i>
+			&nbsp;<b>Scan</b>
+		</button>
+	</ion-content>
+</ion-view>

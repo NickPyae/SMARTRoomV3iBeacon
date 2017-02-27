@@ -1,0 +1,95 @@
+<ion-view>
+  <ion-nav-title class="light">
+    Search and Reserve
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear button-light" ng-click="search(options)" ng-disabled="!validated">
+      Search
+    </button>
+  </ion-nav-buttons>
+  <ion-content has-bouncing="false">
+    <div class="list">
+      <ion-item class="item item-divider" ng-class="{active: showOrHideDateTime}" ng-click="toggleDateTime()">
+        <i class="icon" ng-class="showOrHideDateTime ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i>
+        &nbsp;
+        Date and Time
+      </ion-item>
+
+      <div class="card" ng-if="showOrHideDateTime">
+        <ion-item class="item item-input my-list-input">
+          <span class="input-label">Date</span>
+          <i class="ion-ios7-calendar placeholder-icon icon"></i>
+          <input type="date" ng-model="options.date">
+
+        </ion-item>
+        <ion-item class="item item-input  my-list-input">
+          <span class="input-label">Start Time</span>
+          <i class="ion-ios7-time placeholder-icon icon"></i>
+          <input type="time" ng-model="options.start">
+
+        </ion-item>
+
+        <ion-item class="item item-input  my-list-input">
+          <span class="input-label">End Time</span>
+          <i class="ion-ios7-time-outline placeholder-icon icon"></i>
+          <input type="time" ng-model="options.end">
+
+        </ion-item>
+        <ion-item class="item item-input-inset item-select" style="margin-right: 20px;">
+          <span class="input-label" style="margin-left: 10px;">
+            Repeat
+          </span>
+          <select ng-options="item as item.frequency for item in recurring" ng-model="recurring.item">
+          </select>
+        </ion-item>
+        <ion-item ng-show="recurring.item.frequency !== 'Never'" class="item item-input my-list-input">
+          <span class="input-label">End Repeat</span>
+          <i class="ion-ios7-calendar placeholder-icon icon"></i>
+          <input type="date" ng-model="options.endRepeatDate">
+        </ion-item>
+      </div>
+
+      <ion-item class="item item-divider" ng-class="{active: showOrHideLocation}" ng-click="toggleLocation()">
+        <i class="icon" ng-class="showOrHideLocation ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i>
+        &nbsp;
+        Filters
+      </ion-item>
+
+      <div class="card" ng-if="showOrHideLocation">
+        <ion-item class="item item-input-inset item-select" style="margin-right: 20px;">
+          <span class="input-label" style="margin-left: 10px;">
+            Site
+          </span>
+          <select ng-init="userSettings.siteFilter" ng-options="o.displayName for o in filterOptions.site" ng-model="userSettings.siteFilter">
+          </select>
+        </ion-item>
+        <ion-item class="item item-input-inset item-select" style="margin-right: 20px;">
+          <span class="input-label" style="margin-left: 10px;">
+            Floor
+          </span>
+          <select
+            ng-init="userSettings.levelFilter" ng-options="o.displayName for o in filterOptions.level" ng-model="userSettings.levelFilter">
+          </select>
+        </ion-item>
+        <ion-item class="item item-input-inset item-select" style="margin-right: 20px;">
+          <span class="input-label" style="margin-left: 10px;">
+            Equipment
+          </span>
+          <select
+            ng-init="selectedEquipment.item" ng-options="o.displayName for o in equipments" ng-model="selectedEquipment.item">
+          </select>
+        </ion-item>
+        <ion-item class="item item-input my-list-input">
+          <span class="input-label">Seating Capacity</span>
+          <i class="ion-ios7-settings placeholder-icon icon"></i>
+          <input type="number" ng-model="options.seats">
+        </ion-item>
+      </div>
+      <!-- Error Validation Message -->
+      <ion-item class="item-divider assertive msg-validation" ng-if="!validated">
+        {{errorMsg}}
+      </ion-item>
+    </div>
+
+  </ion-content>
+</ion-view>

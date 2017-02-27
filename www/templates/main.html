@@ -1,0 +1,40 @@
+<ion-tabs class="tabs-icon-top tabs-calm">
+      <ion-tab title="Reservations" icon="icon ion-calendar"
+               ui-sref="tab.reservation">
+
+            <ion-nav-bar class="bar-calm">
+            </ion-nav-bar>
+
+            <ion-nav-view name="tab-reservation"></ion-nav-view>
+      </ion-tab>
+      <ion-tab title="Scan" icon="icon ion-qr-scanner" ui-sref="tab.scan">
+
+            <ion-nav-bar class="bar-calm">
+            </ion-nav-bar>
+            <ion-nav-view name="tab-scan"></ion-nav-view>
+
+      </ion-tab>
+      <ion-tab title="Rooms" icon="icon ion-clipboard" ui-sref="tab.home">  <!-- ion-ios7-home -->
+
+            <ion-nav-bar class="bar-calm">
+            </ion-nav-bar>
+
+            <ion-nav-view name="tab-home"></ion-nav-view>
+      </ion-tab>
+      <ion-tab title="Search" icon="icon ion-search" ui-sref="tab.search"> <!-- ng-click="tabNew()" -->
+
+            <ion-nav-bar class="bar-calm">
+            </ion-nav-bar>
+
+            <ion-nav-view name="tab-search"></ion-nav-view>
+      </ion-tab>
+      <ion-tab title="Settings" icon="icon ion-gear-b" ui-sref="tab.setting">
+
+            <ion-nav-bar class="bar-calm">
+                  <ion-nav-back-button class="button-light">
+                  </ion-nav-back-button>
+            </ion-nav-bar>
+
+            <ion-nav-view name="tab-setting"></ion-nav-view>
+      </ion-tab>
+</ion-tabs>

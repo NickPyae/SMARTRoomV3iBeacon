@@ -1,0 +1,90 @@
+<ion-view>
+	<ion-nav-title class="light">
+		{{room.name | shorttext: 20}}
+	</ion-nav-title>
+
+	<ion-nav-buttons side="right">
+    <button class="button button-clear button-balanced" ng-click="reserve(room.id, room.name, room.slots)" ng-disabled="!validated">
+      Reserve
+    </button>
+	</ion-nav-buttons>
+	<ion-nav-buttons side="left">
+		<button class="button button-clear" ng-click="goToRooms()">
+			<i class="icon ion-ios-arrow-back"></i>
+		</button>
+	</ion-nav-buttons>
+	<ion-content scroll="false" class="has-header" has-bouncing="false">
+		<ion-slide-box style="height: 42%;" on-slide-changed="slideHasChanged($index)">
+		  <ion-slide>
+		  	<div class="card roomDetail-card" >
+			<!--overlay room info-->
+			  <div class="item item-text-wrap">
+			    <h1>{{room.name | shorttext: 20}}</h1>
+			     {{room.location}}
+			     <p>Seats: {{room.seating}}</p>
+			  </div>
+			</div>
+			  <img ng-src="{{getImage(room.siteID , room.img)}}" class="slide-img"/>
+		  </ion-slide>
+		  <ion-slide>
+        <!--LARA 11Feb16: added fullscreen toggle-->
+        <button ng-hide="room.xLocation === -1 && room.yLocation === -1" ng-style="{'position':'absolute', 'left': room.xLocation + 'px', 'top': room.yLocation + 'px'}" class="button-balanced button-icon icon ion-android-pin balanced" ng-click="fullScreen(getImage(room.siteID, room.floor))"></button>
+			  <img ng-src="{{getImage(room.siteID , room.floor)}}" class="slide-img" ng-click="fullScreen(getImage(room.siteID, room.floor))"/>
+		  </ion-slide>
+		</ion-slide-box>
+    <!--LARA 11Feb16: added height:66%-->
+		<div class="list card" style="margin:0px;height:58%">
+
+			<div class="item item-divider">
+		    	Please Select Slot(s):
+		  	</div>
+      <!--LARA 11Feb16: added height 85%-->
+		  <ion-scroll class="roomschedule-slots-height" style="height:85%"> <!--to override no scroll of the ion-content-->
+				<ion-item ng-repeat="s in room.slots" class="item item-checkbox" ng-click="showSlotSummary(s, s.status)">
+					<div ng-hide="s.status !== 'vacant'">
+						<label class="checkbox">
+							<input type="checkbox" ng-model="s.checked" ng-click="selectTimeSlot(s, room.slots)" />
+						</label>
+					</div>
+					<span ng-class="roomCss(s.status)" style="width:5px;">&nbsp;</span>
+					{{s.start}} - {{s.end}} &nbsp;  {{s.info}}
+				</ion-item>
+
+		</ion-scroll>
+		</div>
+
+	</ion-content>
+</ion-view>
+
+<script id="slot-summary.html" type="text/ng-template">
+	<div class="card">
+	  <div class="item item-divider" ng-class="roomCss(selSlot.status)">
+
+	  </div>
+	  <div class="item item-text-wrap">
+	  <p>
+	  		{{selSlot.start}} - {{selSlot.end}}
+	  		<br>
+	    	{{selSlot.info}}
+	    	<br>
+	    	{{selSlot.contact}} <i ng-show="selSlot.num">(</i>{{selSlot.num}}<i ng-show="selSlot.num">)</i>
+	    	<br>
+	    	<br>
+	    	<div class="button-bar">
+
+	    		<!--<button ng-if="selSlot.num" ng-click="crossLaunch('tel:', selSlot.num)" class="button button-icon icon ion-android-call positive"></button>-->
+	    		<!--<button ng-if="selSlot.num" ng-click="crossLaunch('sms:', selSlot.num)" class="button button-icon icon ion-email positive"></button>-->
+	    		<!--<button ng-if="selSlot.num" ng-click="crossLaunch('whatsapp://send?text=', 'Hi ' + selSlot.contact +',')" class="button button-clear" style=" background:url(./img/whatsapp.png) no-repeat; background-size: 28px 28px; background-position:60% 40%"></button>-->
+
+	    	</div>
+
+	   </p>
+
+
+	  </div>
+ 	</div>
+</script>
+<!--
+Jabber Can't be Cross Launched
+<button ng-if="selSlot.jabber" style=" background:url(./img/jabber_im.png) no-repeat; background-size: 28px 28px; background-position:60% 30%"  ng-click="crossLaunch('im:', selSlot.jabber)" class="button button-clear"></button>
+-->

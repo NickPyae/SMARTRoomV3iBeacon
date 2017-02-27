@@ -1,0 +1,315 @@
+/* Empty. Add your own CSS if you like */
+
+.tabs-calm > .tabs{
+	background-color: #113c69 !important;
+  background-image: none !important;
+}
+
+.bar-calm {
+	background-color: #113c69 !important;
+  background-image: none !important;
+}
+
+.tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
+	color: #111111;
+}
+
+.scroll-bar-indicator {
+	display: none;
+}
+
+.no-results {
+  color: gray;
+  font-size: 24px;
+  padding: 50px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.pageTitle{
+	/*position-left:49px;*/
+	margin-left:40px;
+	left:49px !important;
+}
+.status-red{
+	background-color:red;
+	color:red;
+}
+.status-green{
+	/*background-color:green;
+	color:green;*/
+	background-color:#66cc33;
+	color:#66cc33;
+}
+.status-yellow{
+	/*background-color:yellow;
+	color:yellow;*/
+	background-color: #f0b840;
+	color:#f0b840;
+}
+
+.roomCard .item-content{
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:5px;
+	padding-bottom:5px;
+	margin:0px;
+	border:0px;
+}
+.roomCard .roomThumbNail{
+	width: 148px;
+  height: 110px;
+	display:block;
+}
+
+.roomCardInfo{
+	padding-left:0px;
+}
+
+.slide-img{
+	width:100%;
+  height:100%;
+}
+
+.roomDetail-card{
+	background-color:rgba(0, 0, 0, 0.4);
+	position:absolute;
+	width:50%;
+	margin:0px;
+}
+.roomDetail-card .item {
+	background-color:rgba(0, 0, 0, 0.4);
+	color:white;
+}
+.roomDetail-card .item p, .roomDetail-card .item h1{
+	color:white;
+}
+.roomDetail-card .item-text-wrap{
+	padding-left:10px;
+	padding-right:10px;
+}
+.roomDetail-card .item h1{
+	font-size:1.8em;
+	/*display: block;
+    display: -webkit-box;
+	-webkit-line-clamp:2;
+	overflow: hidden;
+  	text-overflow: ellipsis;*/
+
+}
+.disp-rname{
+	display: -webkit-box !important;
+  	margin: 0 auto !important;
+  	-webkit-box-orient: vertical !important;
+  	overflow: hidden !important;
+  	/*text-overflow: ellipsis !important; */
+  	-webkit-line-clamp:2 !important;
+}
+
+/*For Search.html*/
+.my-list-input{
+	/*padding-right:65px;*/
+	background-color: transparent;
+	background:none;
+}
+.my-list-input>input{
+	padding-left:15px;
+	/*margin-left:20px;*/
+}
+/*.my-list-input > select{
+   	position: absolute;
+    top: 0;
+    right: 0;
+    padding: 16px 48px 16px 37px;
+    width: 63%;
+    border: none;
+    background: none;
+    color: #333;
+    text-indent: 0.01px;
+    text-align:left;
+    text-overflow: '';
+    white-space: nowrap;
+    font-size: 14px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+}*/
+.my-list-input > span{
+	width:50%;
+}
+
+.msg-validation{
+	padding-left:15px ;
+	padding-right:500px ;
+	font-style:italic;
+	font-size:0.9em;
+	background-color:rgba(255, 0, 0, 0.14) ;
+}
+
+/*confirm dialog css*/
+.popup-buttons > button{
+	/*border:0px !important;*/
+}
+
+/*animate available slots appearance*/
+.available-slots.ng-enter{
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+  opacity:0;
+  /*-webkit-transform: translateY(-20px);
+  transform: translateY(-20px);*/
+  /*transform:scale(1.15)!important;*/
+
+}
+.available-slots.ng-enter.ng-enter-active{
+	/*-webkit-transform: translateY(0);
+  transform: translateY(0px);*/
+	opacity:1;
+}
+
+/** ion-scroll height for 5-inch and above devices */
+.roomschedule-slots-height {
+	margin: 0px;
+	height: 180px;
+}
+
+/** ion-scroll height for 5-inch and above devices */
+.available-slots-height {
+	margin: 0px;
+	height: 160px;
+}
+
+/** iPhone < 5: */
+@media screen and (device-aspect-ratio: 2/3) {
+	.available-slots-height {
+		margin: 0px;
+		height: 80px;
+	}
+
+	.roomschedule-slots-height {
+		margin: 0px;
+		height: 110px;
+	}
+}
+
+/** iPhone 5 & 5s: */
+@media screen and (device-aspect-ratio: 40/71) {
+	.available-slots-height {
+		margin: 0px;
+		height: 130px;
+	}
+
+	.roomschedule-slots-height {
+		margin: 0px;
+		height: 160px;
+	}
+}
+
+/** iPhone 6 */
+@media screen and (device-aspect-ratio: 375/667) {
+
+}
+
+/** iPhone 6 Plus */
+@media only screen
+and (min-device-width : 414px)
+and (max-device-width : 736px)
+and (device-width : 414px)
+and (device-height : 736px)
+and (orientation : portrait)
+and (-webkit-min-device-pixel-ratio : 3)
+and (-webkit-device-pixel-ratio : 3) {
+
+	.roomschedule-slots-height {
+		margin: 0px;
+		height: 220px;
+	}
+}
+
+/** Android Softkey CSS*/
+@media only screen and (max-device-height:400px){
+
+}
+
+#reserve-popup {
+	overflow:hidden !important;
+}
+
+
+/** ion-scroll height for 5-inch and above devices */
+.available-attendees-height {
+  margin: 0px;
+  height: 190px;
+}
+
+/** iPhone < 5: */
+@media screen and (device-aspect-ratio: 2/3) {
+  .available-attendees-height {
+    margin: 0px;
+    height: 130px;
+  }
+}
+
+/** iPhone 5 & 5s: */
+@media screen and (device-aspect-ratio: 40/71) {
+  .available-attendees-height {
+    margin: 0px;
+    height: 170px;
+  }
+}
+
+/** iPhone 6 */
+@media screen and (device-aspect-ratio: 375/667) {
+  .available-attendees-height {
+    margin: 0px;
+    height: 190px;
+  }
+}
+
+/** iPhone 6 Plus */
+@media only screen
+and (min-device-width : 414px)
+and (max-device-width : 736px)
+and (device-width : 414px)
+and (device-height : 736px)
+and (orientation : portrait)
+and (-webkit-min-device-pixel-ratio : 3)
+and (-webkit-device-pixel-ratio : 3) {
+
+  .available-attendees-height {
+    margin: 0px;
+    height: 240px;
+  }
+}
+
+/** Grouping reservations */
+.list .item.item-accordion {
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
+}
+
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
+/* Suggested by ionic developers to make modal full height on tablets*/
+@media (min-width: 680px){
+  .modal{
+    top: 20px !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+  }
+}
+
+
+

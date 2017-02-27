@@ -1,0 +1,50 @@
+<ion-view>
+	<ion-nav-title class="light">
+		App Settings
+	</ion-nav-title>
+	<ion-nav-buttons side="right">
+    <button class="button button-clear button-light" ng-click="saveSettings()">
+      Save
+    </button>
+	</ion-nav-buttons>
+    <ion-content has-bouncing="false">
+		<div class="list card">
+          	<li class="item item-input-inset item-select">
+			    <div class="input-label">
+			      Landing Page
+			    </div>
+			    <select ng-init="userSettings.landingPage" ng-options="o.displayName for o in landingPageOptions" ng-model="userSettings.landingPage"></select>
+			</li>
+        </div>
+        <div class="item item-divider active">
+        	Rooms Page Filter
+        </div>
+		<div class="list card">
+         	<li class="item item-input-inset item-select">
+			    <div class="input-label">
+			      Site
+			    </div>
+			    <select ng-init="userSettings.siteFilter" ng-options="o.displayName for o in filterOptions.site" ng-model="userSettings.siteFilter"></select>
+			</li>
+        </div>
+		<div class="list card">
+         	<li class="item item-input-inset item-select">
+			    <div class="input-label">
+			      Floor
+			    </div>
+				<select
+						ng-init="userSettings.levelFilter" ng-options="o.displayName for o in filterOptions.level" ng-model="userSettings.levelFilter">
+				</select>
+			</li>
+        </div>
+      <div class="item item-divider active">
+        iBeacons
+      </div>
+      <div class="list card">
+        <ion-toggle ng-model="beacon.checked" toggle-class="toggle-calm">
+          Disable Autoscan
+        </ion-toggle>
+      </div>
+
+    </ion-content>
+  </ion-view>

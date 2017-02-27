@@ -1,0 +1,56 @@
+<ion-view>
+	<ion-nav-title class="light">
+		{{meeting.name | shorttext: 20}}
+	</ion-nav-title>
+
+  <ion-nav-buttons side="right">
+    <button class="button button-clear " ng-class="buttonCss(meeting.status)" ng-click="manageMeeting(meeting.status)">
+      Manage
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <button class="button button-clear" ng-click="goToReservations()">
+      <i class="icon ion-ios-arrow-back"></i>
+    </button>
+  </ion-nav-buttons>
+
+	<ion-content scroll="false" class="has-header" has-bouncing="false">
+		<ion-slide-box style="height: 42%;" on-slide-changed="slideHasChanged($index)">
+		  <ion-slide>
+		  	<div class="card roomDetail-card" >
+			<!--overlay room info-->
+			  <div class="item item-text-wrap">
+			    <h1>{{meeting.roomName | shorttext: 20}}</h1>
+			     {{meeting.location}} {{meeting.floorName}}
+			     <p>{{meeting.start}} to {{meeting.end}}</p>
+			     <p class="assertive">{{meeting.status}}</p>
+			  </div>
+			</div>
+			  <img ng-src="{{getImage(meeting.siteID, meeting.img)}}" class="slide-img"/>
+		  </ion-slide>
+		  <ion-slide>
+        <!--LARA 11Feb16: added fullscreen toggle-->
+        <button ng-hide="meeting.xLocation === -1 && meeting.yLocation === -1" ng-style="{'position':'absolute', 'left': meeting.xLocation + 'px', 'top': meeting.yLocation + 'px'}" class="button-balanced button-icon icon ion-android-pin balanced" ng-click="fullScreen(getImage(meeting.siteID, meeting.floor))"></button>
+			  <img ng-src="{{getImage(meeting.siteID, meeting.floor)}}" class="slide-img" ng-click="fullScreen(getImage(meeting.siteID, meeting.floor))"/>
+		  </ion-slide>
+		</ion-slide-box>
+    <!--LARA 11Feb16: added height:66%-->
+		<div class="list card" style="margin:0px;height:58%">
+
+		<ion-item class="item item-divider">
+			<!-- desperate bug fix, i can't get meeting.count to render with other texts, so i added it to the data itself-->
+			<p>{{meeting.count}}</p>
+		</ion-item>
+<!--LARA 11Feb16: added height 85%-->
+		  <ion-scroll style="height:85%" class="available-attendees-height"> <!--to override no scroll of the ion-content-->
+				<ion-item ng-repeat="a in meeting.attendees" href="" ng-click="attendeeInfo(a)" class="item-icon-right">
+					{{$index+1}})&nbsp;{{a.name}}
+					<i ng-if="a.num" class="icon ion-ios7-information-outline"></i>
+				</ion-item>
+
+		</ion-scroll>
+
+		</div>
+
+	</ion-content>
+</ion-view>

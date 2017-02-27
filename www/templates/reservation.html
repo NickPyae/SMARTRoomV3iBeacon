@@ -1,0 +1,40 @@
+<ion-view>
+  <ion-nav-title class="light">
+    My Reservations
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon icon ion-android-refresh"
+            ng-click="loadReservations()">
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()">
+    </button>
+  </ion-nav-buttons>
+  <ion-content has-bouncing="false">
+    <ion-item class="item item-divider" ng-if="!rooms.length">
+      <p>{{reservationMessage}}</p>
+    </ion-item>
+    <div class="list">
+      <div ng-repeat="group in groups">
+        <ion-item class="item item-divider" ng-if="group.hasSearchResult"
+                  ng-click="toggleGroup(group)"
+                  ng-class="{active: group.isShown}">
+          <i class="icon" ng-class="group.isShown ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i>
+          &nbsp;
+          {{group.name}}
+        </ion-item>
+        <ion-item class="item-accordion roomCard item-thumbnail-left item-icon-right"
+                  href="#/tab/reservation-detail/{{r.id}}"
+                  ng-repeat="r in group.rooms"
+                  ng-show="group.isShown">
+          <div room-card></div>
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </ion-item>
+      </div>
+    </div>
+    <div class="no-results">
+      <p>{{searchResult}}</p>
+    </div>
+  </ion-content>
+</ion-view>
