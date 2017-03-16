@@ -17,8 +17,7 @@ var app = angular.module('smartroom', [
     'jett.ionic.filter.bar'
 ]);
 
-app.run(function($ionicPlatform, CredentialService, ServerConfig, AppConfigService, $rootScope, $state,
-                 $cordovaNetwork, $ionicPopup) {
+app.run(function($ionicPlatform, CredentialService, ServerConfig, AppConfigService, $rootScope, $state, $cordovaNetwork, $ionicPopup) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)

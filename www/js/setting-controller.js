@@ -19,9 +19,6 @@ app.controller('SettingCtrl',function($scope, $ionicHistory, $state, $stateParam
 
 	prepareFilter();
 
-  $scope.beacon = {};
-  $scope.beacon.checked = false;
-
 	function prepareFilter() {
 		MaskFac.loadingMask(true, 'Loading');
 		AppConfigService.prepareFilter().then(function() {

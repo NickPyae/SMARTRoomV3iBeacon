@@ -15,7 +15,7 @@
   </ion-nav-buttons>
 
 	<ion-content scroll="false" class="has-header" has-bouncing="false">
-		<ion-slide-box style="height: 42%;" on-slide-changed="slideHasChanged($index)">
+    <ion-slide-box style="height: 42%;" on-slide-changed="slideHasChanged($index)">
 		  <ion-slide>
 		  	<div class="card roomDetail-card" >
 			<!--overlay room info-->
@@ -34,6 +34,12 @@
 			  <img ng-src="{{getImage(meeting.siteID, meeting.floor)}}" class="slide-img" ng-click="fullScreen(getImage(meeting.siteID, meeting.floor))"/>
 		  </ion-slide>
 		</ion-slide-box>
+    <div ng-if="meeting.remarks">
+      <a href="#" class="item item-icon-left">
+        <i class="icon ion-ios-information-outline"></i>
+        <span>{{ meeting.remarks }}</span>
+      </a>
+    </div>
     <!--LARA 11Feb16: added height:66%-->
 		<div class="list card" style="margin:0px;height:58%">
 

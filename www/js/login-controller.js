@@ -1,33 +1,8 @@
-app.controller('LoginCtrl',function($rootScope, $scope, $state, $timeout, MaskFac,
-                                    AppService,  CredentialService, ServerConfig, $ionicModal){
+app.controller('LoginCtrl',function($rootScope, $scope, $state, $timeout, MaskFac, AppService,  CredentialService, ServerConfig){
 	 $scope.loadLogin=false;
 	 $scope.ip="";//help populate last ip
-   $scope.otp = "";
-
-   $ionicModal.fromTemplateUrl('templates/modal.html', {
-      scope: $scope
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
-
-
-   $scope.showVerifyModal = function() {
-     $scope.modal.show();
-   };
-
-   $scope.generateOTP = function() {
-     // Do $http call to generate OTP
-     console.log('generate OTP');
-   };
-
-   $scope.verify = function(otp) {
-     // Do $http call to verify OTP
-     console.log(otp);
-   };
-
+	 MaskFac.loadingMask(true, 'Initializing');
 	 $scope.$on('$ionicView.enter',function(){
-
-    MaskFac.loadingMask(true, 'Initializing');
 
 	 	if(CredentialService.isLoggedIn()){
 		 	AppService.goHome();
@@ -105,11 +80,4 @@ app.controller('LoginCtrl',function($rootScope, $scope, $state, $timeout, MaskFa
 			MaskFac.loadingMask(false);
 		});
 	};
-})
-.controller('VerifyLoginCtrl', function($rootScope, $scope, $state, MaskFac) {
-
-  $scope.goBackToLogin = function() {
-    $state.go('login');
-  };
-
 });

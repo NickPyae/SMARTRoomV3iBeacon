@@ -9,7 +9,7 @@ angular.module('app.services', [])
     self.reservedScheduleID = null;
     self.reservedRoomList = [];
     function roomInfo(rHostName, rId, rName, rImg, rStatus, rMeetingInfo, rMeetingStart, rMeetingEnd, rReservedDate, rLocationId,
-                      rSiteName, rSeatingCapacity, rFloorplan, rFloorName, rGroup, xLocation, yLocation){
+                      rSiteName, rSeatingCapacity, rFloorplan, rFloorName, rGroup, xLocation, yLocation, remarks){
       var room={};
       room.hostname = rHostName;
       room.id =rId;
@@ -28,6 +28,7 @@ angular.module('app.services', [])
       room.group = rGroup;
       room.xLocation = xLocation;
       room.yLocation = yLocation;
+      room.remarks = remarks;
       return room;
     }
 
@@ -76,7 +77,7 @@ angular.module('app.services', [])
       return _details;
     }
 
-    function meetingDetails(mId, mMeetingName, mRoomName, mLocation, mSiteID, mStatus, mStart, mEnd, mImg, mFloor, mAttendees, floorName, mReservedDate, xLocation, yLocation){
+    function meetingDetails(mId, mMeetingName, mRoomName, mLocation, mSiteID, mStatus, mStart, mEnd, mImg, mFloor, mAttendees, floorName, mReservedDate, xLocation, yLocation, remarks){
       var _meeting ={};
       _meeting.id = mId;
       _meeting.name = mMeetingName;
@@ -100,6 +101,7 @@ angular.module('app.services', [])
       _meeting.reservedDate = mReservedDate;
       _meeting.xLocation = xLocation;
       _meeting.yLocation = yLocation;
+      _meeting.remarks = remarks;
 
       return _meeting;
     }
@@ -159,6 +161,7 @@ angular.module('app.services', [])
       var floorName = null;
       var xLocation = null;
       var yLocation = null;
+      var remarks = null;
 
       for(var index in reservedRoomList) {
         if(reservedRoomList[index].id === id) {
@@ -169,6 +172,7 @@ angular.module('app.services', [])
           floorName = reservedRoomList[index].floorName;
           xLocation = reservedRoomList[index].xLocation;
           yLocation = reservedRoomList[index].yLocation;
+          remarks = reservedRoomList[index].remarks;
           break;
         }
       }
@@ -202,12 +206,12 @@ angular.module('app.services', [])
 
           var myQueriedMeeting = meetingDetails(m.id, m.schedulename, m.roomname,
             siteName, siteID, status, tConvert(m.StartTime), tConvert(m.EndTime),
-            roomImg, floorplanImage, m.Attendees, floorName, m.Date, xLocation, yLocation);
+            roomImg, floorplanImage, m.Attendees, floorName, m.Date, xLocation, yLocation, remarks);
 
           // meetingDetails with fake attendees.
           //var myQueriedMeeting = meetingDetails(m.id, m.schedulename, m.roomname,
           //	siteName, siteID, status, tConvert(m.StartTime), tConvert(m.EndTime),
-          //			 roomImg, floorplanImage, m.attendees, floorName, m.Date, xLocation, yLocation);
+          //			 roomImg, floorplanImage, m.attendees, floorName, m.Date, xLocation, yLocation, '');
 
           def.resolve(myQueriedMeeting);
         }).
@@ -355,12 +359,12 @@ angular.module('app.services', [])
                   lstRooms.push
                   (
                     roomInfo(hostname, r.roomid, r.roomname, r.imagesrc, angular.lowercase(r.status), subject, tConvert(startTime), tConvert(endTime), '', r.siteid,
-                      r.sitename, r.seatingcapacity, r.floorplan, r.floorname, '', r.xLocation, r.yLocation)
+                      r.sitename, r.seatingcapacity, r.floorplan, r.floorname, '', r.xLocation, r.yLocation, '')
 
                   );
                 } else {
                   lstRooms.push(roomInfo('', r.roomid, r.roomname, r.imagesrc, angular.lowercase(r.status), '', '', '', '', r.siteid, r.sitename,
-                    r.seatingcapacity, r.floorplan, r.floorname, '', r.xLocation, r.yLocation));
+                    r.seatingcapacity, r.floorplan, r.floorname, '', r.xLocation, r.yLocation, ''));
                 }
               }
             });
@@ -418,7 +422,7 @@ angular.module('app.services', [])
                 // roomInfo has reservation date
                 lstRooms.push(
                   roomInfo('', r.scheduleid, r.roomname, r.imgsrc, angular.lowercase(r.status), r.name, tConvert(r.starttime), tConvert(r.endtime), reservedDate, r.siteid,
-                    r.sitename, r.seatingcapacity, r.floorplan, r.floorname, r.Group, xLocation, yLocation)
+                    r.sitename, r.seatingcapacity, r.floorplan, r.floorname, r.Group, xLocation, yLocation, r.remarks)
                 );
 
                 //Lara 29Jan16: only catch the first reservation for this roomId
@@ -480,7 +484,7 @@ angular.module('app.services', [])
                 // roomInfo has reservation date
                 lstRooms.push(
                   roomInfo(r.hostname, r.scheduleid, r.roomname, r.imgsrc, angular.lowercase(r.status), r.name, tConvert(r.starttime), tConvert(r.endtime), reservedDate, r.siteid,
-                    r.sitename, r.seatingcapacity, r.floorplan, r.floorname, r.Group, xLocation, yLocation)
+                    r.sitename, r.seatingcapacity, r.floorplan, r.floorname, r.Group, xLocation, yLocation, r.remarks)
                 );
               }catch(err){
               }
@@ -750,6 +754,7 @@ angular.module('app.services', [])
 
           $http.jsonp(url)
             .success(function (data, status, headers, config) {
+              console.log('DATA', data);
               if (data.success === true)
               {
                 self.setReservedScheduleID(null);
